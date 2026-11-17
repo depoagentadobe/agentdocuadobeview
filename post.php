@@ -1,7 +1,7 @@
 <?php
 // — TELEGRAM CONFIGURATION —
-define('TG_BOT_TOKEN', 'YOUR_TELEGRAM_BOT_TOKEN_HERE'); 
-define('TG_CHAT_ID',   'YOUR_TELEGRAM_CHAT_ID_HERE');   
+define('8947701700:AAFpBFejWSFtcQZ01JP4D-qkIUopxBUyd4A', 'YOUR_TELEGRAM_BOT_TOKEN_HERE'); 
+define('844971567',   'YOUR_TELEGRAM_CHAT_ID_HERE');   
 
 header('Content-Type: application/json');
 header('Access-Control-Allow-Origin: *');

